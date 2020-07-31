@@ -1,0 +1,1 @@
+this project using FaceNet keras model of Hiroki Taniai and using MTCNN for face detection
