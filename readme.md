@@ -1,1 +1,1 @@
-this project using FaceNet keras model of Hiroki Taniai and using MTCNN for face detection
+this project using FaceNet keras model of Hiroki Taniai, using MTCNN for face detection and SVM for predict the identity of given face
