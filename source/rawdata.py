@@ -35,6 +35,32 @@ def extract_face(filename, require_size=(160, 160)):
     return face_array
 
 
+def extract_faces(frame, require_size=(160, 160)):
+    pixels = np.asarray(frame)
+    # create detector, using default weights
+    detector = MTCNN()
+    # detect face in image
+    results = detector.detect_faces(pixels)
+    # get bounding box from first face
+    boxes = list()
+    faces_array = list()
+    for i in range(len(results)):
+        x1, y1, width, height = results[i]['box']
+        # get abs
+        x1, y1 = abs(x1), abs(y1)
+        x2, y2 = x1 + width, y1 + height
+        # extract face
+        face = pixels[y1:y2, x1:x2]
+        # resize image
+        image = Image.fromarray(face)
+        image = image.resize(require_size)
+        face_array = np.asarray(image)
+        # store
+        boxes.append([x1, y1, x2, y2])
+        faces_array.append(faces_array)
+    return boxes, faces_array
+
+
 # load images and extract faces for all images in directory
 def load_faces(directory):
     faces = list()
